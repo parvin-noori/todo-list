@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
+import { FiEdit } from "react-icons/fi";
+
 import { toast } from "react-toastify";
 
 export default function NewTask(props) {
-  const { showModal, setShowModal, dispatch } = props;
+  const { showModal, setShowModal, dispatch, tasks } = props;
   const [task, setTask] = useState("");
   const inputRef = useRef(null);
   const modalRef = useRef(null);
@@ -34,6 +36,16 @@ export default function NewTask(props) {
       toast.error("please enter an input");
       return;
     }
+
+    const isDuplicate = tasks.some(
+      (t) => t.name.toLowerCase() === task.trim().toLowerCase()
+    );
+
+    if (isDuplicate) {
+      toast.error("task already exist");
+      return;
+    }
+
     dispatch({
       type: "ADD_TASK",
       payload: { id: Date.now(), name: task, completed: false },
@@ -46,20 +58,23 @@ export default function NewTask(props) {
   return (
     <>
       <button
-        className="cursor-pointer bg-white rounded-md px-4 py-2"
+        className="cursor-pointer bg-white rounded-md p-3"
         onClick={() => setShowModal(!showModal)}
       >
-        add
+        <FiEdit />
       </button>
 
       {/* modal  */}
       <div
         ref={modalRef}
-        className={`modal w-md z-20 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
+        className={`modal sm:w-md w-xs  z-20 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
           showModal ? "scale-100 opacity-100" : "scale-0 opacity-0"
         }`}
       >
-        <form className="flex item-center gap-2" onSubmit={handleSubmit}>
+        <form
+          className="flex sm:flex-row flex-col item-center gap-2"
+          onSubmit={handleSubmit}
+        >
           <input
             value={task}
             ref={inputRef}
@@ -68,11 +83,12 @@ export default function NewTask(props) {
             className="border-2 border-secondary outline-none p-2 rounded-md w-full"
             placeholder="New task..."
           />
-          <input
-            type="submit"
-            placeholder="add task"
-            className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white px-3 rounded-md cursor-pointer"
-          />
+          <button
+            type="button"
+            className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white sm:px-3 p-2 rounded-md cursor-pointer"
+          >
+            save
+          </button>
         </form>
       </div>
 
