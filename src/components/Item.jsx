@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { FiEdit, FiTrash } from "react-icons/fi";
 
 export default function Item(props) {
   const { task, dispatch } = props;
@@ -92,20 +93,20 @@ export default function Item(props) {
             </span>
           </label>
           <button
-            className="ms-auto text-secondary cursor-pointer bg-white px-4 py-1 rounded-md border border-primary border-2 hover:bg-primary hover:text-white transition-all duration-100"
+            className="ms-auto cursor-pointer p-2 text-white rounded-md border-2 border-transparent  bg-primary hover:bg-white hover:!text-primary hover:border-primary transition-all duration-100"
             onClick={() => {
               setEditable(true);
             }}
           >
-            edit
+            <FiEdit />
           </button>
         </>
       )}
       <button
-        className="ms-auto cursor-pointer text-white px-4 py-1 rounded-md border border-transparent bg-primary border-2 transition-all duration-100 hover:border-primary hover:bg-white hover:!text-secondary"
+        className="ms-auto cursor-pointer text-primary text-white p-2 rounded-md border border-transparent bg-primary border-2 transition-all duration-100 hover:border-primary hover:bg-white hover:!text-secondary"
         onClick={() => handleDelete(task.id)}
       >
-        delete
+        <FiTrash />
       </button>
     </div>
   );
