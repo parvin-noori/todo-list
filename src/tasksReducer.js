@@ -24,7 +24,11 @@ export const taskReducer = function (state, action) {
     case "EDIT_TASK": {
       newState = state.map((task) => {
         if (task.id === action.payload.id) {
-          return { ...task, name: action.payload.name };
+          return {
+            ...task,
+            name: action.payload.name,
+            priority: action.payload.priority,
+          };
         }
         return task;
       });

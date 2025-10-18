@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 export default function NewTask(props) {
   const { showModal, setShowModal, dispatch, tasks } = props;
   const [task, setTask] = useState("");
+  const [priority, setpriority] = useState("medium");
   const inputRef = useRef(null);
   const modalRef = useRef(null);
 
@@ -48,7 +49,12 @@ export default function NewTask(props) {
 
     dispatch({
       type: "ADD_TASK",
-      payload: { id: Date.now(), name: task, completed: false },
+      payload: {
+        id: Date.now(),
+        name: task,
+        completed: false,
+        priority: priority,
+      },
     });
     toast.success("task added successfuly");
     setTask("");
@@ -83,8 +89,19 @@ export default function NewTask(props) {
             className="border-2 border-secondary outline-none p-2 rounded-md w-full"
             placeholder="New task..."
           />
+          <select
+            className="border-2 border-secondary rounded-md outline-none"
+            name=""
+            id=""
+            value={priority}
+            onChange={(e) => setpriority(e.target.value)}
+          >
+            <option value="high">high</option>
+            <option value="medium">medium</option>
+            <option value="low">low</option>
+          </select>
           <button
-            type="button"
+            type="submit"
             className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white sm:px-3 p-2 rounded-md cursor-pointer"
           >
             save
