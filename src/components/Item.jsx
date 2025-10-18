@@ -19,7 +19,8 @@ export default function Item(props) {
 
   function handleEdit(taskId) {
     const isDuplicate = tasks.some(
-      (t) => t.name.toLowerCase() === name.trim().toLowerCase()
+      (t) =>
+        t.name.toLowerCase() === name.trim().toLowerCase() && taskId !== t.id
     );
 
     if (isDuplicate) {
@@ -64,7 +65,7 @@ export default function Item(props) {
           <select
             name=""
             id=""
-            className="border-2 border-primary rounded-md outline-none py-1"
+            className="border-2 border-primary rounded-md outline-none px-1"
             value={priority}
             onChange={(e) => setpriority(e.target.value)}
           >

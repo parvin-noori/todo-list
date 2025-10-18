@@ -90,7 +90,7 @@ export default function NewTask(props) {
             placeholder="New task..."
           />
           <select
-            className="border-2 border-secondary rounded-md outline-none"
+            className="border-2 border-secondary rounded-md outline-none px-1"
             name=""
             id=""
             value={priority}
