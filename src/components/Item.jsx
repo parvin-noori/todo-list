@@ -82,14 +82,14 @@ export default function Item(props) {
       ) : (
         <>
           <label
-            htmlFor={`task.id`}
+            htmlFor={task.id}
             className={`grow space-x-2 flex items-center gap-x-2 ${
               task.completed ? "line-through" : ""
             }`}
           >
             <input
               type="checkbox"
-              id={`task.id`}
+              id={task.id}
               onChange={() => handleToggle(task.id)}
               checked={task.completed}
             />
