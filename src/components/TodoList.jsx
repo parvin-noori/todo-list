@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react";
+import Item from "./Item";
 
-export default function TodoList() {
+export default function TodoList({ tasks, dispatch }) {
   return (
-    <div>TodoList</div>
-  )
+    <ul className="space-y-3">
+      {tasks.map((task) => (
+        <li key={task.id}>
+          <Item task={task} dispatch={dispatch} />
+        </li>
+      ))}
+    </ul>
+  );
 }

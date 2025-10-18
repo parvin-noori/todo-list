@@ -1,0 +1,83 @@
+import React, { useState, useRef, useEffect } from "react";
+import { toast } from "react-toastify";
+
+export default function NewTask(props) {
+  const { showModal, setShowModal, dispatch } = props;
+  const [task, setTask] = useState("");
+  const inputRef = useRef(null);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (showModal && inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    }
+
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!task.trim()) {
+      toast.error("please enter an input");
+      return;
+    }
+    dispatch({
+      type: "ADD_TASK",
+      payload: { id: Date.now(), name: task, completed: false },
+    });
+    toast.success("task added successfuly");
+    setTask("");
+    setShowModal(false);
+  }
+
+  return (
+    <>
+      <button
+        className="cursor-pointer bg-white rounded-md px-4 py-2"
+        onClick={() => setShowModal(!showModal)}
+      >
+        add
+      </button>
+
+      {/* modal  */}
+      <div
+        ref={modalRef}
+        className={`modal w-md z-20 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
+          showModal ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        }`}
+      >
+        <form className="flex item-center gap-2" onSubmit={handleSubmit}>
+          <input
+            value={task}
+            ref={inputRef}
+            onChange={(e) => setTask(e.target.value)}
+            type="text"
+            className="border-2 border-secondary outline-none p-2 rounded-md w-full"
+            placeholder="New task..."
+          />
+          <input
+            type="submit"
+            placeholder="add task"
+            className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white px-3 rounded-md cursor-pointer"
+          />
+        </form>
+      </div>
+
+      {/* overlay  */}
+      {showModal && <div className="bg-black/80 fixed inset-0 z-10"></div>}
+    </>
+  );
+}

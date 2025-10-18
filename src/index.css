@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme static{
+    --color-primary: #D4CAEB;
+    --color-secondary:#8F7FB7
+}
