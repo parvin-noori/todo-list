@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function Item(props) {
-  const { task, dispatch } = props;
+  const { task, dispatch, tasks } = props;
   const [name, setName] = useState(task.name);
   const [priority, setpriority] = useState(task.priority);
   const [editable, setEditable] = useState(false);
@@ -17,6 +18,14 @@ export default function Item(props) {
   }
 
   function handleEdit(taskId) {
+    const isDuplicate = tasks.some(
+      (t) => t.name.toLowerCase() === name.trim().toLowerCase()
+    );
+
+    if (isDuplicate) {
+      toast.error("task is already taken");
+      return;
+    }
     dispatch({
       type: "EDIT_TASK",
       payload: { id: taskId, name: name, priority: priority },
@@ -55,6 +64,7 @@ export default function Item(props) {
           <select
             name=""
             id=""
+            className="border-2 border-primary rounded-md outline-none py-1"
             value={priority}
             onChange={(e) => setpriority(e.target.value)}
           >

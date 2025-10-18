@@ -6,7 +6,7 @@ export default function TodoList({ tasks, dispatch }) {
     <ul className="space-y-3 md:h-92 h-svh overflow-y-scroll">
       {tasks.map((task) => (
         <li key={task.id}>
-          <Item task={task} dispatch={dispatch} />
+          <Item task={task} dispatch={dispatch} tasks={tasks}/>
         </li>
       ))}
     </ul>

@@ -28,7 +28,7 @@ export default function Todo() {
         </div>
         <SearchBar query={query} setQuery={setQuery} />
         {results.length > 0 ? (
-          <TodoList tasks={results} dispatch={dispatch} />
+          <TodoList tasks={results} dispatch={dispatch}/>
         ) : (
           <span>no results found</span>
         )}
