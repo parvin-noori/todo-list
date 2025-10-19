@@ -47,7 +47,7 @@ export default function Item(props) {
   };
 
   return (
-    <div className="bg-white rounded-md p-3 flex items-center gap-x-3">
+    <div className="bg-white rounded-md p-3 flex items-stratch gap-x-3">
       {editable ? (
         <>
           <input
@@ -65,7 +65,7 @@ export default function Item(props) {
           <select
             name=""
             id=""
-            className="border-2 border-primary rounded-md outline-none px-1"
+            className="border-2 border-primary rounded-md outline-none p-1"
             value={priority}
             onChange={(e) => setpriority(e.target.value)}
           >
@@ -81,10 +81,10 @@ export default function Item(props) {
           </button>
         </>
       ) : (
-        <>
+        <div className="flex items-center gap-x-2 w-full">
           <label
             htmlFor={task.id}
-            className={`grow space-x-2 flex items-center gap-x-2 ${
+            className={`space-x-2 flex items-center gap-x-2 ${
               task.completed ? "line-through" : ""
             }`}
           >
@@ -95,14 +95,14 @@ export default function Item(props) {
               checked={task.completed}
             />
             {task.name}
-            <span
-              className={`px-2  text-sm rounded-full ${
-                priorityColors[task.priority]
-              }`}
-            >
-              {task.priority}
-            </span>
           </label>
+          <span
+            className={`px-2  text-sm rounded-full ${
+              priorityColors[task.priority]
+            }`}
+          >
+            {task.priority}
+          </span>
           <button
             className="ms-auto cursor-pointer p-2 text-white rounded-md border-2 border-transparent  bg-primary hover:bg-white hover:!text-primary hover:border-primary transition-all duration-100"
             onClick={() => {
@@ -111,7 +111,7 @@ export default function Item(props) {
           >
             <FiEdit />
           </button>
-        </>
+        </div>
       )}
       <button
         className="ms-auto cursor-pointer text-primary text-white p-2 rounded-md border border-transparent bg-primary border-2 transition-all duration-100 hover:border-primary hover:bg-white hover:!text-secondary"
