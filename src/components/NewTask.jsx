@@ -71,46 +71,57 @@ export default function NewTask(props) {
       </button>
 
       {/* modal  */}
-      <div
+      {/* <div
         ref={modalRef}
-        className={`modal sm:w-md w-xs  z-20 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
+        className={`modal sm:w-md w-xs  z-20 bg-white absolute top-10 sm:top-1/2 left-1/2 transform -translate-x-1/2 sm:-translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
           showModal ? "scale-100 opacity-100" : "scale-0 opacity-0"
         }`}
+      > */}
+      <div
+        className={`fixed inset-0 flex items-center justify-center bg-black/80 z-10 overflow-y-auto transition-all duration-300
+    ${
+      showModal
+        ? "opacity-100 pointer-events-auto"
+        : "opacity-0 pointer-events-none"
+    }`}
       >
-        <form
-          className="flex sm:flex-row flex-col item-center gap-2"
-          onSubmit={handleSubmit}
+        <div
+          className={`relative mx-auto my-10 z-20 bg-white rounded-lg shadow-lg p-4 transform transition-all duration-300
+      ${showModal ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
+          ref={modalRef}
         >
-          <input
-            value={task}
-            ref={inputRef}
-            onChange={(e) => setTask(e.target.value)}
-            type="text"
-            className="border-2 border-secondary outline-none p-2 rounded-md w-full"
-            placeholder="New task..."
-          />
-          <select
-            className="border-2 border-secondary rounded-md outline-none sm:px-1 p-2"
-            name=""
-            id=""
-            value={priority}
-            onChange={(e) => setpriority(e.target.value)}
+          <form
+            className="flex sm:flex-row flex-col item-center gap-2"
+            onSubmit={handleSubmit}
           >
-            <option value="high">high</option>
-            <option value="medium">medium</option>
-            <option value="low">low</option>
-          </select>
-          <button
-            type="submit"
-            className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white sm:px-3 p-2 rounded-md cursor-pointer"
-          >
-            save
-          </button>
-        </form>
+            <input
+              value={task}
+              ref={inputRef}
+              onChange={(e) => setTask(e.target.value)}
+              type="text"
+              className="border-2 border-secondary outline-none p-2 rounded-md w-full"
+              placeholder="New task..."
+            />
+            <select
+              className="border-2 border-secondary rounded-md outline-none sm:px-1 p-2"
+              name=""
+              id=""
+              value={priority}
+              onChange={(e) => setpriority(e.target.value)}
+            >
+              <option value="high">high</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
+            </select>
+            <button
+              type="submit"
+              className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white sm:px-3 p-2 rounded-md cursor-pointer"
+            >
+              save
+            </button>
+          </form>
+        </div>
       </div>
-
-      {/* overlay  */}
-      {showModal && <div className="bg-black/80 fixed inset-0 z-10"></div>}
     </>
   );
 }
