@@ -16,7 +16,7 @@
 ## 🌐 Live Demo
 
 Check out the live version on Vercel:  
-[https://todo-list-iota-lovat-65.vercel.app](todo-list-iota-lovat-65.vercel.app)
+[https://todo-list-iota-lovat-65.vercel.app/](todo-list-iota-lovat-65.vercel.app)
 
 ---
 
