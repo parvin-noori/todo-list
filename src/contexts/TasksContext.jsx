@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 export const initialTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -8,32 +8,30 @@ const taskReducer = function (state, action) {
   switch (action.type) {
     case "ADD_TASK": {
       newState = [...state, action.payload];
-      return newState;
+      break;
     }
     case "REMOVE_TASK": {
       newState = state.filter((task) => task.id !== action.payload.id);
       break;
     }
     case "TOGGLE_TASK": {
-      newState = state.map((task) => {
-        if (task.id === action.payload.id) {
-          return { ...task, completed: !task.completed };
-        }
-        return task;
-      });
+      newState = state.map((task) =>
+        task.id === action.payload.id
+          ? { ...task, completed: !task.completed }
+          : task
+      );
       break;
     }
     case "EDIT_TASK": {
-      newState = state.map((task) => {
-        if (task.id === action.payload.id) {
-          return {
-            ...task,
-            name: action.payload.name,
-            priority: action.payload.priority,
-          };
-        }
-        return task;
-      });
+      newState = state.map((task) =>
+        task.id === action.payload.id
+          ? {
+              ...task,
+              name: action.payload.name,
+              priority: action.payload.priority,
+            }
+          : task
+      );
 
       break;
     }
@@ -48,7 +46,7 @@ const taskReducer = function (state, action) {
 
 export const TasksContext = createContext();
 
-export function TasksProvider({ children }) {
+function TasksProvider({ children }) {
   const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
   const store = { tasks, dispatch };
 
@@ -56,3 +54,7 @@ export function TasksProvider({ children }) {
     <TasksContext.Provider value={store}>{children}</TasksContext.Provider>
   );
 }
+
+const useTasksContext = () => useContext(TasksContext);
+
+export { TasksProvider, useTasksContext };

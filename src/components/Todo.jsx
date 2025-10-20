@@ -4,10 +4,10 @@ import TodoList from "./TodoList";
 import NewTask from "./NewTask";
 import { filterTasks } from "../utils/mainUtils";
 import { ToastContainer } from "react-toastify";
-import { TasksContext } from "../contexts/TasksContext";
+import {  useTasksContext } from "../contexts/TasksContext";
 
 export default function Todo() {
-  const { tasks } = useContext(TasksContext);
+  const { tasks } = useTasksContext();
   const [query, setQuery] = useState("");
   const results = filterTasks(query, tasks);
 
@@ -18,9 +18,7 @@ export default function Todo() {
           <h3 className="text-4xl capitalize text-secondary font-bold">
             task manager
           </h3>
-          <NewTask
-            tasks={results}
-          />
+          <NewTask tasks={results} />
         </div>
         <SearchBar query={query} setQuery={setQuery} />
         {tasks.length === 0 ? (

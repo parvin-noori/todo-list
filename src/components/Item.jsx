@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { TasksContext } from "../contexts/TasksContext";
+import { useTasksContext } from "../contexts/TasksContext";
 
 export default function Item(props) {
   const { task, tasks } = props;
-  const { dispatch } = useContext(TasksContext);
+  const { dispatch } = useTasksContext();
   const [name, setName] = useState(task.name);
   const [priority, setpriority] = useState(task.priority);
   const [editable, setEditable] = useState(false);
