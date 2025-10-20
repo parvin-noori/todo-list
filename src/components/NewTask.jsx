@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import { toast } from "react-toastify";
-import { TasksContext, useTasksContext } from "../contexts/TasksContext";
+import { useTasksContext } from "../contexts/TasksContext";
 
 export default function NewTask(props) {
   const { tasks } = props;
@@ -76,7 +76,7 @@ export default function NewTask(props) {
       {/* modal  */}
       <div
         ref={modalRef}
-        className={`modal sm:w-md w-xs  z-20 bg-white absolute top-10 sm:top-1/2 left-1/2 transform -translate-x-1/2 sm:-translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
+        className={`modal sm:w-md w-xs  z-20 bg-white dark:bg-secondary absolute top-10 sm:top-1/2 left-1/2 transform -translate-x-1/2 sm:-translate-y-1/2 p-5 rounded-xl shadow-lg transition-all duration-300 ${
           showModal ? "scale-100 opacity-100" : "scale-0 opacity-0"
         }`}
       >
@@ -89,11 +89,11 @@ export default function NewTask(props) {
             ref={inputRef}
             onChange={(e) => setTask(e.target.value)}
             type="text"
-            className="border-2 border-secondary outline-none p-2 rounded-md w-full"
+            className="border-2 border-secondary dark:border-white dark:bg-white outline-none p-2 rounded-md w-full"
             placeholder="New task..."
           />
           <select
-            className="border-2 border-secondary rounded-md outline-none sm:px-1 p-2"
+            className="border-2 border-secondary dark:border-white dark:bg-white rounded-md outline-none sm:px-1 p-2"
             name=""
             id=""
             value={priority}
@@ -105,7 +105,7 @@ export default function NewTask(props) {
           </select>
           <button
             type="submit"
-            className="bg-secondary hover:bg-secondary/90 transition-all duration-200 text-white sm:px-3 p-2 rounded-md cursor-pointer"
+            className="bg-secondary dark:bg-white hover:bg-secondary/90 hover:dark:bg-white/90 transition-all duration-200 text-white dark:text-black sm:px-3 p-2 rounded-md cursor-pointer"
           >
             save
           </button>

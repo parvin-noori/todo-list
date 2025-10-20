@@ -54,7 +54,7 @@ export default function Item(props) {
         <>
           <input
             type="text"
-            className="border-2 border-primary outline-none p-1 rounded-md w-full"
+            className="border-2 border-primary dark:border-secondary outline-none p-1 rounded-md w-full"
             value={name}
             ref={editInputRef}
             onChange={(e) => setName(e.target.value)}
@@ -67,7 +67,7 @@ export default function Item(props) {
           <select
             name=""
             id=""
-            className="border-2 border-primary rounded-md outline-none p-1"
+            className="border-2 border-primary dark:border-secondary rounded-md outline-none p-1"
             value={priority}
             onChange={(e) => setpriority(e.target.value)}
           >
@@ -76,7 +76,7 @@ export default function Item(props) {
             <option value="low">low</option>
           </select>
           <button
-            className="ms-auto cursor-pointer text-white px-4 py-1 rounded-md bg-secondary p-2 transition-all duration-100 hover:bg-secondary/90"
+            className="ms-auto cursor-pointer text-white px-4 py-1 rounded-md bg-primary dark:bg-secondary p-2 transition-all duration-100 hover:bg-secondary/90"
             onClick={() => handleEdit(task.id)}
           >
             save
@@ -106,7 +106,7 @@ export default function Item(props) {
             {task.priority}
           </span>
           <button
-            className="ms-auto cursor-pointer p-2 text-white rounded-md border-2 border-transparent  bg-primary hover:bg-white hover:!text-primary hover:border-primary transition-all duration-100"
+            className="ms-auto cursor-pointer p-2 text-white rounded-md border-2 border-transparent bg-primary dark:bg-secondary hover:bg-white hover:!text-primary hover:dark:!text-secondary hover:border-primary hover:dark:border-secondary transition-all duration-100"
             onClick={() => {
               setEditable(true);
             }}
@@ -116,7 +116,7 @@ export default function Item(props) {
         </div>
       )}
       <button
-        className="ms-auto cursor-pointer text-primary text-white p-2 rounded-md border border-transparent bg-primary border-2 transition-all duration-100 hover:border-primary hover:bg-white hover:!text-secondary"
+        className="ms-auto cursor-pointer text-primary text-white p-2 rounded-md border border-transparent bg-primary dark:bg-secondary border-2 transition-all duration-100 hover:border-primary hover:dark:border-secondary hover:bg-white hover:!text-secondary"
         onClick={() => handleDelete(task.id)}
       >
         <FiTrash />
