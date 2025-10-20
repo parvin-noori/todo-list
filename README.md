@@ -1,7 +1,8 @@
-# 🧩 Task Manager – React + useReducer + Tailwind
+# 🧩 Task Manager – React + Context + useReducer + Tailwind
 
-> A small React project built for practicing the **useReducer** hook.  
-> It lets you add, edit, delete, and search tasks — all saved in **LocalStorage** with error handling for duplicate entries.
+> A small React project built for practicing **useReducer** and **Context API**.  
+> Add, edit, delete, and search tasks — all saved in **LocalStorage** with duplicate validation.  
+> Also includes a **light/dark theme toggle** for styling practice.
 
 ---
 
@@ -28,8 +29,9 @@ Check out the live version on Vercel:
 - 🔍 Search through tasks  
 - 💾 Persistent data with LocalStorage  
 - ⚠️ Duplicate task validation with toast notifications  
-- 🎨 Styled using Tailwind CSS  
-- ⚡ State management via useReducer
+- 🎨 Light/Dark theme toggle  
+- ⚡ State management via **Context + useReducer**  
+- 🧩 Styled with **Tailwind CSS**
 
 ---
 
@@ -37,10 +39,11 @@ Check out the live version on Vercel:
 
 This project was created to practice:
 
-- Using **useReducer** instead of multiple useState hooks  
-- Understanding **state management** and reducer patterns  
-- Working with **LocalStorage** for persistent data  
-- Structuring React components cleanly with **Tailwind CSS**
+- Using **useReducer** for centralized state management  
+- Managing global state with **Context API**  
+- Persisting tasks in **LocalStorage**  
+- Implementing a **theme toggle** with Tailwind's dark mode  
+- Structuring React components cleanly and responsively  
 
 ---
 
@@ -51,6 +54,5 @@ This project was created to practice:
 | ⚛️ React | UI development |
 | 🎨 Tailwind CSS | Styling and responsive design |
 | 💾 LocalStorage | Data persistence |
-| 🧩 useReducer | State management |
-| ☕ React Toastify | Toast notifications |
-
+| 🧩 useReducer + Context | State management |
+| ☕ React Toastify | Toast notifications |  
