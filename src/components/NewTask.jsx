@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import  { useState, useRef, useEffect, useContext } from "react";
 import { FiEdit } from "react-icons/fi";
 
 import { toast } from "react-toastify";
+import { TasksContext } from "../contexts/TasksContext";
 
 export default function NewTask(props) {
-  const { showModal, setShowModal, dispatch, tasks } = props;
+  const { tasks } = props;
+  const { dispatch } = useContext(TasksContext);
   const [task, setTask] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [priority, setpriority] = useState("medium");
   const inputRef = useRef(null);
   const modalRef = useRef(null);

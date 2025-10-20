@@ -1,6 +1,8 @@
+import { createContext, useReducer } from "react";
+
 export const initialTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-export const taskReducer = function (state, action) {
+const taskReducer = function (state, action) {
   let newState;
 
   switch (action.type) {
@@ -43,3 +45,14 @@ export const taskReducer = function (state, action) {
   localStorage.setItem("tasks", JSON.stringify(newState));
   return newState;
 };
+
+export const TasksContext = createContext();
+
+export function TasksProvider({ children }) {
+  const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
+  const store = { tasks, dispatch };
+
+  return (
+    <TasksContext.Provider value={store}>{children}</TasksContext.Provider>
+  );
+}

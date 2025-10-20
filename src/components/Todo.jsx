@@ -1,14 +1,13 @@
-import React, { useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import SearchBar from "./SearchBar";
 import TodoList from "./TodoList";
-import { initialTasks, taskReducer } from "../tasksReducer";
 import NewTask from "./NewTask";
 import { filterTasks } from "../utils/mainUtils";
 import { ToastContainer } from "react-toastify";
+import { TasksContext } from "../contexts/TasksContext";
 
 export default function Todo() {
-  const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
-  const [showModal, setShowModal] = useState(false);
+  const { tasks } = useContext(TasksContext);
   const [query, setQuery] = useState("");
   const results = filterTasks(query, tasks);
 
@@ -20,9 +19,6 @@ export default function Todo() {
             task manager
           </h3>
           <NewTask
-            showModal={showModal}
-            setShowModal={setShowModal}
-            dispatch={dispatch}
             tasks={results}
           />
         </div>
@@ -32,7 +28,7 @@ export default function Todo() {
         ) : results.length === 0 ? (
           <span className="capitalize text-center">no results found</span>
         ) : (
-          <TodoList tasks={results} dispatch={dispatch} />
+          <TodoList tasks={results} />
         )}
 
         <ToastContainer position="top-right" autoClose={2000} />
