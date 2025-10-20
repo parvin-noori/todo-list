@@ -27,11 +27,14 @@ export default function Todo() {
           />
         </div>
         <SearchBar query={query} setQuery={setQuery} />
-        {tasks.length > 0 ? (
-          <TodoList tasks={results} dispatch={dispatch} />
+        {tasks.length === 0 ? (
+          <span className="capitalize text-center">no tasks yet</span>
+        ) : results.length === 0 ? (
+          <span className="capitalize text-center">no results found</span>
         ) : (
-          <span>no results found</span>
+          <TodoList tasks={results} dispatch={dispatch} />
         )}
+
         <ToastContainer position="top-right" autoClose={2000} />
       </div>
     </>
