@@ -49,7 +49,7 @@ export default function Item(props) {
   };
 
   return (
-    <div className="bg-white rounded-md p-3 flex items-stratch gap-x-3">
+    <div className="bg-white rounded-md p-3 flex items-center gap-x-3">
       {editable ? (
         <>
           <input
@@ -96,7 +96,7 @@ export default function Item(props) {
               onChange={() => handleToggle(task.id)}
               checked={task.completed}
             />
-            {task.name}
+            <span className="line-clamp-2 break-all">{task.name}</span>
           </label>
           <span
             className={`px-2  text-sm rounded-full ${

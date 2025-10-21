@@ -13,11 +13,22 @@ export default function Todo() {
   const { tasks } = useTasksContext();
   const { changeTheme, state } = useAppContext();
   const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
   const results = filterTasks(query, tasks);
+
+  const tabs = [
+    { id: "all", label: "all", filter: () => true },
+    { id: "completed", label: "completed", filter: (t) => t.completed },
+    { id: "pending", label: "pending", filter: (t) => !t.completed },
+  ];
+
+  const activeFilter = tabs.find((tab) => tab.id === activeTab).filter;
+  const filterResults = results.filter(activeFilter);
 
   return (
     <>
       <div className="backdrop-filter-sm bg-white/30 p-5 md:rounded-lg sm:w-md w-full gap-y-5 flex flex-col">
+        {/* header  */}
         <div className="flex items-center sm:justify-between gap-x-2">
           <h3 className="text-4xl capitalize text-secondary dark:text-white font-bold">
             task manager
@@ -36,19 +47,41 @@ export default function Todo() {
           </button>
           <NewTask tasks={results} />
         </div>
+
+        {/* search  */}
         <SearchBar query={query} setQuery={setQuery} />
-        {results.length !== 0 && (
+
+        {/* tabs  */}
+        <ul className="flex items-center gap-1 border-b-2 border-primary dark:border-secondary">
+          {tabs.map((tab) => (
+            <li key={tab.id}>
+              <button
+                className={`px-5  py-3 rounded-t-md cursor-pointer  transition-all duraion-500 ${
+                  activeTab === tab.id
+                    ? "bg-white"
+                    : "bg-primary dark:bg-secondary dark:text-white hover:bg-primary/50"
+                }`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* task list  */}
+        {filterResults.length !== 0 && (
           <span>
-            {results.filter((result) => result.completed).length} / {results.length}{" "}
-            tasks completed
+            {filterResults.filter((result) => result.completed).length} /{" "}
+            {filterResults.length} tasks completed
           </span>
         )}
         {tasks.length === 0 ? (
           <span className="capitalize text-center">no tasks yet</span>
-        ) : results.length === 0 ? (
+        ) : filterResults.length === 0 ? (
           <span className="capitalize text-center">no results found</span>
         ) : (
-          <TodoList tasks={results} />
+          <TodoList tasks={filterResults} />
         )}
 
         <ToastContainer position="top-right" autoClose={2000} />
