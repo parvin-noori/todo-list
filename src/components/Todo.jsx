@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IoMdMoon } from "react-icons/io";
+import { MdSunny } from "react-icons/md";
 import { ToastContainer } from "react-toastify";
 import { useAppContext } from "../contexts/AppContext";
 import { useTasksContext } from "../contexts/TasksContext";
@@ -6,8 +8,6 @@ import { filterTasks } from "../utils/mainUtils";
 import NewTask from "./NewTask";
 import SearchBar from "./SearchBar";
 import TodoList from "./TodoList";
-import { IoMdMoon } from "react-icons/io";
-import { MdSunny } from "react-icons/md";
 
 export default function Todo() {
   const { tasks } = useTasksContext();
@@ -37,6 +37,12 @@ export default function Todo() {
           <NewTask tasks={results} />
         </div>
         <SearchBar query={query} setQuery={setQuery} />
+        {results.length !== 0 && (
+          <span>
+            {results.filter((result) => result.completed).length} / {results.length}{" "}
+            tasks completed
+          </span>
+        )}
         {tasks.length === 0 ? (
           <span className="capitalize text-center">no tasks yet</span>
         ) : results.length === 0 ? (
