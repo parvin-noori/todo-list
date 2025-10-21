@@ -23,15 +23,21 @@ Check out the live version on Vercel:
 
 ## 🚀 Features
 
-- ✨ Add new tasks  
-- ✏️ Edit existing tasks  
-- ❌ Remove tasks  
-- 🔍 Search through tasks  
-- 💾 Persistent data with LocalStorage  
-- ⚠️ Duplicate task validation with toast notifications  
-- 🎨 Light/Dark theme toggle  
-- ⚡ State management via **Context + useReducer**  
-- 🧩 Styled with **Tailwind CSS**
+- ✨ Add new tasks
+- ✏️ Edit existing tasks
+- ❌ Remove tasks
+- 🔍 Search through tasks
+- 💾 Persistent data with LocalStorage
+- ⚠️ Duplicate task validation with toast notifications
+- 🎨 Light/Dark theme toggle
+- ⚡ State management via Context + useReducer
+- 🧩 Styled with Tailwind CSS
+- 🗂 Task Filtering Tabs:
+  - **All Tasks** (show all tasks)
+  - **Completed** (show only completed tasks)
+  - **Pending** (show only tasks not yet done)
+  - **High Priority** (filter by high priority tasks)
+
 
 ---
 
