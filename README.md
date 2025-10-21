@@ -36,7 +36,6 @@ Check out the live version on Vercel:
   - **All Tasks** (show all tasks)
   - **Completed** (show only completed tasks)
   - **Pending** (show only tasks not yet done)
-  - **High Priority** (filter by high priority tasks)
 
 
 ---
