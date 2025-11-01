@@ -1,6 +1,8 @@
-import Todo from "./components/Todo";
+import Todo from "./features/tasks/Todo";
 
 function App() {
+
+
   return (
     <>
       <Todo />

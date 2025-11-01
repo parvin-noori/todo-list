@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
-
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useTasksContext } from "../contexts/TasksContext";
+import { addTask } from "../features/tasks/taskSlice";
 
 export default function NewTask(props) {
   const { tasks } = props;
-  const { dispatch } = useTasksContext();
+  const dispatch = useDispatch();
   const [task, setTask] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [priority, setpriority] = useState("medium");
@@ -50,15 +50,14 @@ export default function NewTask(props) {
       return;
     }
 
-    dispatch({
-      type: "ADD_TASK",
-      payload: {
+    dispatch(
+      addTask({
         id: Date.now(),
         name: task,
         completed: false,
         priority: priority,
-      },
-    });
+      })
+    );
     toast.success("task added successfuly");
     setTask("");
     setShowModal(false);

@@ -1,6 +1,4 @@
-import React, { useContext } from "react";
-import Item from "./Item";
-import { TasksContext } from "../contexts/TasksContext";
+import Item from "../../components/Item";
 
 export default function TodoList({ tasks }) {
   return (

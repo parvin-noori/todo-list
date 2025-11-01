@@ -1,22 +1,23 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useTasksContext } from "../contexts/TasksContext";
+import { editTask, removeTask, toggleTask } from "../features/tasks/taskSlice";
 
 export default function Item(props) {
   const { task, tasks } = props;
-  const { dispatch } = useTasksContext();
+  const dispatch = useDispatch();
   const [name, setName] = useState(task.name);
   const [priority, setpriority] = useState(task.priority);
   const [editable, setEditable] = useState(false);
   const editInputRef = useRef(null);
 
   function handleDelete(taskId) {
-    dispatch({ type: "REMOVE_TASK", payload: { id: taskId } });
+    dispatch(removeTask({ id: taskId }));
   }
 
   function handleToggle(taskId) {
-    dispatch({ type: "TOGGLE_TASK", payload: { id: taskId } });
+    dispatch(toggleTask({ id: taskId }));
   }
 
   function handleEdit(taskId) {
@@ -29,10 +30,7 @@ export default function Item(props) {
       toast.error("task is already taken");
       return;
     }
-    dispatch({
-      type: "EDIT_TASK",
-      payload: { id: taskId, name: name, priority: priority },
-    });
+    dispatch(editTask({ id: taskId, name: name, priority: priority }));
     setEditable(false);
   }
 

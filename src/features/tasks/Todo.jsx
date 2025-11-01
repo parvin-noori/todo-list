@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdMoon } from "react-icons/io";
 import { MdSunny } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { useAppContext } from "../contexts/AppContext";
-import { useTasksContext } from "../contexts/TasksContext";
-import { filterTasks } from "../utils/mainUtils";
-import NewTask from "./NewTask";
-import SearchBar from "./SearchBar";
+import { changeTheme } from "../themeSlice";
+import { filterTasks } from "../../utils/mainUtils";
+import NewTask from "../../components/NewTask";
+import SearchBar from "../../components/SearchBar";
 import TodoList from "./TodoList";
 
 export default function Todo() {
-  const { tasks } = useTasksContext();
-  const { changeTheme, state } = useAppContext();
+  const tasks = useSelector((state) => state.tasks);
+  const theme = useSelector((state) => state.theme.theme);
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const results = filterTasks(query, tasks);
+  const dispatch = useDispatch();
+
+  //change theme
+  useEffect(() => {
+    const root = document.documentElement;
+    theme === "dark"
+      ? root.classList.add("dark")
+      : root.classList.remove("dark");
+  }, [theme]);
 
   const tabs = [
     { id: "all", label: "all", filter: () => true },
@@ -35,15 +44,15 @@ export default function Todo() {
           </h3>
           <button
             className={`cursor-pointer sm:m-0 ms-auto text-xl sm:fixed sm:top-10 sm:end-10 size-9 grid place-content-center rounded-md p-5 ${
-              state.theme === "light"
+              theme === "light"
                 ? "bg-secondary text-yellow-500"
                 : "bg-primary text-yellow-500"
             }`}
             onClick={() =>
-              changeTheme(state.theme === "light" ? "dark" : "light")
+              dispatch(changeTheme(theme === "light" ? "dark" : "light"))
             }
           >
-            {state.theme === "light" ? <IoMdMoon /> : <MdSunny />}
+            {theme === "light" ? <IoMdMoon /> : <MdSunny />}
           </button>
           <NewTask tasks={results} />
         </div>

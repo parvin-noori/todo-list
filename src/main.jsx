@@ -1,16 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import App from "./App.jsx";
-import { AppProvider } from "./contexts/AppContext.jsx";
-import { TasksProvider } from "./contexts/TasksContext.jsx";
 import "./index.css";
+import { store } from "./store.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AppProvider>
-      <TasksProvider>
-        <App />
-      </TasksProvider>
-    </AppProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>
 );
